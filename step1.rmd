@@ -1,0 +1,30 @@
+---
+title: "Curating the data step 1"
+output: html_document
+---
+
+```{r}
+library(gutenbergr)
+library(tidytext)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(scales)
+library(ggforce)
+library(forcats)
+```
+
+I am marking this as _do not eval_ so it doesn't redownload 
+each time. I can save a working copy of the data and use that
+when experimenting,  though still with the ability to run the whole
+process. To load the saved dataset I can use the `load()` function.
+
+```{r eval = FALSE}
+
+quakersaints <-  gutenberg_download(c(19605))
+save(quakersaints, file="data/quakersaints.rda")
+```
+```{r eval=FALSE}
+load("quakersaints.rda")
+```
