@@ -23,6 +23,7 @@ process. To load the saved dataset I can use the `load()` function.
 ```{r eval = FALSE}
 
 quakersaints <-  gutenberg_download(c(19605))
+
 save(quakersaints, file="quakersaints.rda")
 ```
 ```{r eval=FALSE}
@@ -31,7 +32,7 @@ load("quakersaints.rda")
 
 ```{r eval = FALSE}
 
-grimm <-  gutenberg_download(c(19605))
+grimm <-  gutenberg_download(c(196775))
 save(grimm, file="grimm.rda")
 ```
 ```{r eval=FALSE}
