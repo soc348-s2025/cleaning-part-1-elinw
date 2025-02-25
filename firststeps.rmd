@@ -1,0 +1,83 @@
+---
+title: "Starting tidy text"
+output: html_notebook
+---
+
+```{r}
+library(gutenbergr)
+library(tidytext)
+#library(janeaustenr)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(scales)
+```
+
+```{r eval = FALSE}
+quakersaints <-  gutenberg_download(c(19605))
+```
+
+```{r}
+
+tidy_quakersaints <- quakersaints |>
+  unnest_tokens(word, text) 
+```
+
+View the tidied data. 
+## What does unnest_tokens() do?
+
+One think that would be convenient is to be able to reconstruct where in the text the particular token came from.
+For example we could track the row number in the original data.
+
+```{r}
+
+tidy_quakersaints <- quakersaints |> 
+  mutate(row = row_number()) |>
+  unnest_tokens(word, text) 
+```
+## View the data. How does it differ? 
+
+
+Let's find the most common words
+
+
+```{r}
+tidy_quakersaints |>  count(word, sort = TRUE)
+```
+
+## What do you notice about the most common words?  Are they interesting? Do they have anythig in common?
+
+
+
+In text data "stop words" are words that are common and not meaningful. They are words we don't want to include in our data.  
+This  is a judgement, but to keep it simple, let's use the stop word list from the tidy text package.
+This list comes from three different lexicons so we could pick one, but for our first try we'll use them all.
+
+Use View()  to look at the stop words.
+
+
+```{r}
+
+tidy_quakersaints <- quakersaints |>
+   mutate(row = row_number()) |>
+  unnest_tokens(word, text) |>
+  anti_join(stop_words)
+```
+
+
+What is an anti-join?
+```{}
+
+```
+
+Notice that I use `|>` instead of `%>%` ... this is newer style and does not require loading dplyr or magrittr.  It is part of base r.
+
+
+```{r}
+tidy_quakersaints |>  count(word, sort = TRUE)
+```
+How does this list of the most frequent words differ from the first one? 
+
+
+
